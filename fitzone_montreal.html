@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitZone Montréal — Centre Multisports</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noir: #0a0a0a;
+    --blanc: #f5f2ec;
+    --rouge: #e63329;
+    --orange: #f97316;
+    --gris: #1c1c1c;
+    --gris-clair: #2e2e2e;
+    --texte-doux: #b0aca4;
+    --accent: #ff5e3a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--noir);
+    color: var(--blanc);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: padding 0.3s;
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    color: var(--blanc);
+    text-decoration: none;
+  }
+  .logo span { color: var(--rouge); }
+  nav ul {
+    list-style: none;
+    display: flex; gap: 36px;
+  }
+  nav ul a {
+    color: var(--texte-doux);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--blanc); }
+  .nav-cta {
+    background: var(--rouge);
+    color: var(--blanc) !important;
+    padding: 10px 22px;
+    border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: var(--blanc) !important; }
+
+  /* ── HERO ── */
+  #accueil {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0d08 40%, #2a1205 70%, #0a0a0a 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 1;
+    background-image:
+      linear-gradient(rgba(230,51,41,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(230,51,41,0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, black 30%, transparent 80%);
+  }
+  .hero-circle {
+    position: absolute; right: -200px; top: 50%; transform: translateY(-60%);
+    width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(230,51,41,0.18) 0%, transparent 65%);
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 800px; }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--rouge); margin-bottom: 24px;
+    border: 1px solid rgba(230,51,41,0.4); padding: 6px 14px; border-radius: 2px;
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.9; letter-spacing: 0.02em;
+    color: var(--blanc);
+    margin-bottom: 28px;
+  }
+  h1 em { color: var(--rouge); font-style: normal; }
+  .hero-sub {
+    font-size: 1.1rem; font-weight: 300; color: var(--texte-doux);
+    max-width: 480px; margin-bottom: 44px;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--rouge); color: var(--blanc);
+    padding: 16px 36px; border-radius: 4px;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--blanc);
+    padding: 16px 36px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.25);
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--blanc); transform: translateY(-2px); }
+  .hero-stats {
+    position: absolute; right: 48px; bottom: 80px; z-index: 2;
+    display: flex; flex-direction: column; gap: 32px; align-items: flex-end;
+  }
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--blanc);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--texte-doux); text-transform: uppercase; letter-spacing: 0.15em; }
+
+  /* ── SECTIONS GÉNÉRALES ── */
+  section { padding: 100px 48px; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--rouge); margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 0.95; letter-spacing: 0.02em;
+    margin-bottom: 20px;
+  }
+  .section-divider {
+    width: 48px; height: 3px;
+    background: var(--rouge);
+    margin-bottom: 40px;
+  }
+
+  /* ── À PROPOS ── */
+  #apropos { background: var(--gris); }
+  .apropos-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .apropos-visual {
+    position: relative; height: 460px;
+  }
+  .apropos-block {
+    position: absolute;
+    border-radius: 6px; overflow: hidden;
+  }
+  .apropos-block-main {
+    width: 80%; height: 100%;
+    background: linear-gradient(135deg, #1a0d08, #2e1810);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem; color: rgba(230,51,41,0.15);
+    letter-spacing: 0.1em;
+  }
+  .apropos-badge {
+    position: absolute; bottom: -20px; right: 0;
+    background: var(--rouge);
+    padding: 24px 28px; border-radius: 6px;
+    text-align: center;
+  }
+  .apropos-badge .num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; display: block; }
+  .apropos-badge .lab { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; }
+  .apropos-text p { color: var(--texte-doux); margin-bottom: 16px; font-weight: 300; }
+  .apropos-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px;
+  }
+  .feat-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 16px; background: rgba(255,255,255,0.04); border-radius: 6px;
+    border-left: 2px solid var(--rouge);
+  }
+  .feat-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .feat-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; }
+  .feat-desc { font-size: 0.78rem; color: var(--texte-doux); }
+
+  /* ── SERVICES ── */
+  #services { background: var(--noir); }
+  .services-intro { max-width: 600px; margin-bottom: 60px; }
+  .services-intro p { color: var(--texte-doux); font-weight: 300; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    max-width: 1200px;
+  }
+  .service-card {
+    background: var(--gris-clair);
+    padding: 40px 32px;
+    transition: background 0.25s;
+    cursor: default;
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: var(--rouge);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover { background: #252525; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem;
+    color: rgba(230,51,41,0.2); line-height: 1; margin-bottom: 20px;
+    display: block;
+  }
+  .service-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+  .service-card h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .service-card p { color: var(--texte-doux); font-size: 0.88rem; font-weight: 300; margin-bottom: 20px; }
+  .service-price {
+    font-size: 1.3rem; font-weight: 600; color: var(--rouge);
+  }
+  .service-price small { font-size: 0.75rem; color: var(--texte-doux); font-weight: 300; }
+
+  /* ── GALERIE ── */
+  #galerie { background: var(--gris); }
+  .galerie-header { max-width: 600px; margin-bottom: 48px; }
+  .galerie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 260px 180px;
+    gap: 4px;
+    max-width: 1200px;
+  }
+  .galerie-item {
+    border-radius: 4px; overflow: hidden;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .galerie-item .g-bg {
+    position: absolute; inset: 0;
+    transition: transform 0.5s;
+  }
+  .galerie-item:hover .g-bg { transform: scale(1.06); }
+  .galerie-item .g-overlay {
+    position: absolute; inset: 0;
+    background: rgba(10,10,10,0); transition: background 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .galerie-item:hover .g-overlay { background: rgba(230,51,41,0.25); }
+  .galerie-item .g-label {
+    position: absolute; bottom: 14px; left: 14px;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    background: rgba(10,10,10,0.7); padding: 5px 10px; border-radius: 3px;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .galerie-item:hover .g-label { opacity: 1; }
+  .g1 { grid-column: span 2; grid-row: span 2; }
+  .g-bg-1 { background: linear-gradient(135deg, #1a2a1a, #0d3d1f); }
+  .g-bg-2 { background: linear-gradient(135deg, #2a1010, #3d1a0d); }
+  .g-bg-3 { background: linear-gradient(135deg, #0d1a2a, #0a2d3d); }
+  .g-bg-4 { background: linear-gradient(135deg, #1a1a2a, #0d0d3d); }
+  .g-bg-5 { background: linear-gradient(135deg, #2a2a0d, #3d3510); }
+  .g-icon { font-size: 3rem; opacity: 0.4; position: relative; z-index: 1; }
+
+  /* ── AGENDA ── */
+  #agenda { background: var(--noir); }
+  .agenda-wrap {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 60px;
+    max-width: 1200px; align-items: start;
+  }
+  .mini-cal {
+    background: var(--gris); border-radius: 8px; padding: 24px; position: sticky; top: 100px;
+  }
+  .cal-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+  }
+  .cal-month {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em;
+  }
+  .cal-nav button {
+    background: none; border: none; color: var(--texte-doux); cursor: pointer;
+    font-size: 1.2rem; padding: 4px 8px; transition: color 0.2s;
+  }
+  .cal-nav button:hover { color: var(--blanc); }
+  .cal-days {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+    text-align: center;
+  }
+  .cal-day-label {
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--texte-doux); padding: 6px 0;
+  }
+  .cal-day {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; border-radius: 4px; cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    color: var(--texte-doux);
+  }
+  .cal-day:hover { background: rgba(255,255,255,0.08); color: var(--blanc); }
+  .cal-day.today { background: var(--rouge); color: var(--blanc); font-weight: 600; }
+  .cal-day.has-event { position: relative; color: var(--blanc); }
+  .cal-day.has-event::after {
+    content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%; background: var(--orange);
+  }
+  .cal-day.empty { cursor: default; }
+  .events-list { display: flex; flex-direction: column; gap: 16px; }
+  .event-card {
+    display: flex; gap: 20px; align-items: flex-start;
+    background: var(--gris); border-radius: 8px; padding: 24px;
+    border-left: 3px solid var(--rouge);
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .event-card:hover { transform: translateX(6px); }
+  .event-card.sport { border-color: #3b82f6; }
+  .event-card.yoga { border-color: #8b5cf6; }
+  .event-card.nutrition { border-color: #10b981; }
+  .event-date-block {
+    background: rgba(255,255,255,0.06); border-radius: 6px;
+    padding: 12px 16px; text-align: center; flex-shrink: 0; min-width: 60px;
+  }
+  .event-date-day { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1; display: block; }
+  .event-date-mon { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--texte-doux); }
+  .event-info h4 { font-weight: 600; margin-bottom: 6px; }
+  .event-meta { display: flex; gap: 16px; font-size: 0.8rem; color: var(--texte-doux); flex-wrap: wrap; }
+  .event-meta span::before { content: ''; margin-right: 4px; }
+  .event-tag {
+    display: inline-block; padding: 3px 10px; border-radius: 3px; font-size: 0.7rem;
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 8px;
+  }
+  .tag-cardio { background: rgba(230,51,41,0.2); color: var(--rouge); }
+  .tag-sport { background: rgba(59,130,246,0.2); color: #3b82f6; }
+  .tag-yoga { background: rgba(139,92,246,0.2); color: #8b5cf6; }
+  .tag-nutrition { background: rgba(16,185,129,0.2); color: #10b981; }
+  .tag-combat { background: rgba(249,115,22,0.2); color: var(--orange); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--gris); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 80px;
+    max-width: 1200px;
+  }
+  .contact-info h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 28px;
+  }
+  .contact-item {
+    display: flex; gap: 16px; margin-bottom: 28px; align-items: flex-start;
+  }
+  .contact-icon {
+    width: 44px; height: 44px; background: rgba(230,51,41,0.15); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    flex-shrink: 0; border: 1px solid rgba(230,51,41,0.25);
+  }
+  .contact-detail label { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--texte-doux); margin-bottom: 4px; }
+  .contact-detail span { font-weight: 400; }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--texte-doux); }
+  .form-group input, .form-group textarea, .form-group select {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px; padding: 14px 16px; color: var(--blanc);
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--rouge);
+  }
+  .form-group select option { background: var(--gris); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    background: var(--rouge); color: var(--blanc); border: none; cursor: pointer;
+    padding: 16px 36px; border-radius: 4px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start; margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--accent); transform: translateY(-2px); }
+  .form-success {
+    display: none; background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3);
+    border-radius: 4px; padding: 16px 20px; color: #10b981; font-size: 0.9rem;
+  }
+
+  /* ── AIDE ── */
+  #aide { background: var(--noir); }
+  .aide-grid {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 80px;
+    max-width: 1200px;
+  }
+  .aide-cats { display: flex; flex-direction: column; gap: 8px; }
+  .aide-cat {
+    padding: 14px 20px; border-radius: 6px; cursor: pointer;
+    font-size: 0.88rem; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.2s;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .aide-cat:hover, .aide-cat.active { background: var(--rouge); border-color: var(--rouge); }
+  .aide-cat .count {
+    font-size: 0.75rem; font-weight: 400; color: var(--texte-doux);
+    background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px;
+  }
+  .aide-cat.active .count { background: rgba(255,255,255,0.2); color: var(--blanc); }
+  .aide-content h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2rem; margin-bottom: 28px;
+  }
+  .faq { border-top: 1px solid rgba(255,255,255,0.08); }
+  .faq-item {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+  .faq-question {
+    width: 100%; background: none; border: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0; text-align: left;
+    color: var(--blanc); font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    transition: color 0.2s;
+  }
+  .faq-question:hover { color: var(--rouge); }
+  .faq-arrow {
+    font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; margin-left: 16px;
+    color: var(--texte-doux);
+  }
+  .faq-question.open .faq-arrow { transform: rotate(45deg); color: var(--rouge); }
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s;
+    color: var(--texte-doux); font-size: 0.9rem; font-weight: 300;
+  }
+  .faq-answer.open { max-height: 300px; padding-bottom: 20px; }
+
+  /* ── NOTICE IA ── */
+  #ia-notice { background: linear-gradient(135deg, var(--gris) 0%, #1a1008 100%); }
+  .ia-container {
+    max-width: 900px; margin: 0 auto; text-align: center;
+  }
+  .ia-icon { font-size: 3.5rem; margin-bottom: 24px; display: block; }
+  .ia-notice-box {
+    background: rgba(249,115,22,0.08); border: 1px solid rgba(249,115,22,0.25);
+    border-radius: 10px; padding: 48px; margin-top: 40px; text-align: left;
+  }
+  .ia-notice-box h3 {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em;
+    color: var(--orange); margin-bottom: 20px;
+  }
+  .ia-notice-box p { color: var(--texte-doux); font-weight: 300; margin-bottom: 14px; }
+  .ia-notice-box ul { color: var(--texte-doux); font-weight: 300; padding-left: 20px; }
+  .ia-notice-box ul li { margin-bottom: 8px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060606;
+    padding: 60px 48px 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px;
+    max-width: 1200px; margin-bottom: 48px;
+  }
+  .footer-brand .logo { display: block; margin-bottom: 16px; font-size: 2.2rem; }
+  .footer-brand p { color: var(--texte-doux); font-size: 0.88rem; font-weight: 300; max-width: 280px; }
+  .footer-col h4 {
+    font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--blanc); margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul a { color: var(--texte-doux); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul a:hover { color: var(--blanc); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.8rem; color: var(--texte-doux);
+    max-width: 1200px;
+  }
+  .footer-author { color: var(--rouge); font-weight: 600; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-content > * { animation: fadeInUp 0.8s ease both; }
+  .hero-tag { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.25s; }
+  .hero-sub { animation-delay: 0.4s; }
+  .hero-btns { animation-delay: 0.55s; }
+  .hero-stats { animation-delay: 0.5s; animation: fadeInUp 0.8s 0.5s ease both; }
+
+  /* Mobile responsive */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    section { padding: 70px 24px; }
+    #accueil { padding: 0 24px 60px; }
+    h1 { font-size: 4rem; }
+    .hero-stats { display: none; }
+    .apropos-grid, .contact-grid, .agenda-wrap, .aide-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .galerie-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .g1 { grid-column: span 1; grid-row: span 1; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#accueil" class="logo">Fit<span>Zone</span></a>
+  <ul>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#agenda">Agenda</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#aide">Aide</a></li>
+    <li><a href="#contact" class="nav-cta">S'inscrire</a></li>
+  </ul>
+</nav>
+
+<!-- HERO / ACCUEIL -->
+<section id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-circle"></div>
+  <div class="hero-content">
+    <span class="hero-tag">🏋️ Centre Multisports · Montréal</span>
+    <h1>Dépasse<br>tes <em>limites</em></h1>
+    <p class="hero-sub">FitZone Montréal — votre partenaire de performance. Entraînements, sports collectifs, yoga et bien plus dans un espace conçu pour vous.</p>
+    <div class="hero-btns">
+      <a href="#services" class="btn-primary">Nos services</a>
+      <a href="#contact" class="btn-outline">Essai gratuit</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">1200+</div>
+      <div class="stat-label">Membres actifs</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">18</div>
+      <div class="stat-label">Disciplines</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7j/7</div>
+      <div class="stat-label">Ouvert</div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="apropos-grid">
+    <div class="apropos-visual">
+      <div class="apropos-block apropos-block-main">FITZONE</div>
+      <div class="apropos-badge">
+        <span class="num">10</span>
+        <span class="lab">ans d'excellence</span>
+      </div>
+    </div>
+    <div class="apropos-text">
+      <p class="section-label">Notre histoire</p>
+      <h2>Plus qu'un gym,<br>une communauté</h2>
+      <div class="section-divider"></div>
+      <p>FitZone Montréal a été fondé en 2015 avec une vision simple : offrir un espace de sport accessible, inclusif et stimulant pour tous les Montréalais.</p>
+      <p>Nos installations couvrent plus de 8 000 m² répartis sur deux étages, avec des équipements de dernière génération, des studios de groupe et une piscine semi-olympique.</p>
+      <p>Notre équipe de 35 entraîneurs certifiés est là pour vous accompagner, peu importe votre niveau de départ.</p>
+      <div class="apropos-features">
+        <div class="feat-item">
+          <span class="feat-icon">🏊</span>
+          <div>
+            <div class="feat-title">Piscine semi-olympique</div>
+            <div class="feat-desc">25m, 6 couloirs, température contrôlée</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <span class="feat-icon">💪</span>
+          <div>
+            <div class="feat-title">Zone musculation</div>
+            <div class="feat-desc">400+ appareils libres et guidés</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <span class="feat-icon">🧘</span>
+          <div>
+            <div class="feat-title">3 studios collectifs</div>
+            <div class="feat-desc">Yoga, Pilates, HIIT, Spinning</div>
+          </div>
+        </div>
+        <div class="feat-item">
+          <span class="feat-icon">🥊</span>
+          <div>
+            <div class="feat-title">Salle de combat</div>
+            <div class="feat-desc">Boxe, MMA, Muay Thaï</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES / PRODUITS -->
+<section id="services">
+  <div class="services-intro">
+    <p class="section-label">Ce que nous offrons</p>
+    <h2>Services & Abonnements</h2>
+    <div class="section-divider"></div>
+    <p>Des formules flexibles pour chaque mode de vie et chaque objectif.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-num">01</span>
+      <span class="service-icon">🏋️</span>
+      <h3>Accès Standard</h3>
+      <p>Accès illimité à la salle de musculation, aux équipements cardio et aux vestiaires premium.</p>
+      <div class="service-price">39$ <small>/mois</small></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02</span>
+      <span class="service-icon">⭐</span>
+      <h3>Accès Premium</h3>
+      <p>Tout le Standard + cours collectifs illimités, accès piscine et bilan fitness mensuel.</p>
+      <div class="service-price">69$ <small>/mois</small></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03</span>
+      <span class="service-icon">👑</span>
+      <h3>Elite VIP</h3>
+      <p>Accès 24/7, entraîneur personnel (4 séances/mois), nutrition et zone spa incluse.</p>
+      <div class="service-price">149$ <small>/mois</small></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">04</span>
+      <span class="service-icon">🧘</span>
+      <h3>Cours de Yoga</h3>
+      <p>Hatha, Vinyasa, Yin Yoga — 3 niveaux disponibles. Tapis et accessoires fournis.</p>
+      <div class="service-price">25$ <small>/cours</small></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">05</span>
+      <span class="service-icon">🥊</span>
+      <h3>Arts Martiaux</h3>
+      <p>Boxe, Muay Thaï, MMA. Cours adaptés à tous les niveaux, équipement fourni.</p>
+      <div class="service-price">35$ <small>/cours</small></div>
+    </div>
+    <div class="service-card">
+      <span class="service-num">06</span>
+      <span class="service-icon">🍎</span>
+      <h3>Nutrition & Coaching</h3>
+      <p>Plan alimentaire personnalisé + suivi bimensuel avec un nutritionniste certifié.</p>
+      <div class="service-price">89$ <small>/mois</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="galerie-header">
+    <p class="section-label">Nos espaces</p>
+    <h2>Galerie Photos</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="galerie-grid">
+    <div class="galerie-item g1">
+      <div class="g-bg g-bg-1"></div>
+      <div class="g-overlay"></div>
+      <span class="g-icon">🏋️</span>
+      <span class="g-label">Zone Musculation</span>
+    </div>
+    <div class="galerie-item">
+      <div class="g-bg g-bg-2"></div>
+      <div class="g-overlay"></div>
+      <span class="g-icon">🥊</span>
+      <span class="g-label">Salle de Combat</span>
+    </div>
+    <div class="galerie-item">
+      <div class="g-bg g-bg-3"></div>
+      <div class="g-overlay"></div>
+      <span class="g-icon">🏊</span>
+      <span class="g-label">Piscine</span>
+    </div>
+    <div class="galerie-item">
+      <div class="g-bg g-bg-4"></div>
+      <div class="g-overlay"></div>
+      <span class="g-icon">🧘</span>
+      <span class="g-label">Studio Yoga</span>
+    </div>
+    <div class="galerie-item">
+      <div class="g-bg g-bg-5"></div>
+      <div class="g-overlay"></div>
+      <span class="g-icon">🚴</span>
+      <span class="g-label">Studio Spinning</span>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA / CALENDRIER -->
+<section id="agenda">
+  <p class="section-label">Planifiez votre semaine</p>
+  <h2>Agenda & Événements</h2>
+  <div class="section-divider"></div>
+  <div class="agenda-wrap">
+    <div class="mini-cal">
+      <div class="cal-header">
+        <span class="cal-month">Mars 2026</span>
+        <div class="cal-nav">
+          <button>‹</button>
+          <button>›</button>
+        </div>
+      </div>
+      <div class="cal-days">
+        <div class="cal-day-label">D</div>
+        <div class="cal-day-label">L</div>
+        <div class="cal-day-label">M</div>
+        <div class="cal-day-label">M</div>
+        <div class="cal-day-label">J</div>
+        <div class="cal-day-label">V</div>
+        <div class="cal-day-label">S</div>
+        <!-- Week 1 -->
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day">1</div>
+        <!-- Week 2 -->
+        <div class="cal-day">2</div>
+        <div class="cal-day has-event">3</div>
+        <div class="cal-day">4</div>
+        <div class="cal-day has-event">5</div>
+        <div class="cal-day">6</div>
+        <div class="cal-day has-event">7</div>
+        <div class="cal-day">8</div>
+        <!-- Week 3 -->
+        <div class="cal-day">9</div>
+        <div class="cal-day has-event">10</div>
+        <div class="cal-day">11</div>
+        <div class="cal-day">12</div>
+        <div class="cal-day has-event">13</div>
+        <div class="cal-day has-event">14</div>
+        <div class="cal-day">15</div>
+        <!-- Week 4 -->
+        <div class="cal-day">16</div>
+        <div class="cal-day">17</div>
+        <div class="cal-day has-event">18</div>
+        <div class="cal-day">19</div>
+        <div class="cal-day">20</div>
+        <div class="cal-day has-event">21</div>
+        <div class="cal-day">22</div>
+        <!-- Week 5 -->
+        <div class="cal-day today">23</div>
+        <div class="cal-day has-event">24</div>
+        <div class="cal-day">25</div>
+        <div class="cal-day has-event">26</div>
+        <div class="cal-day">27</div>
+        <div class="cal-day">28</div>
+        <div class="cal-day has-event">29</div>
+        <div class="cal-day">30</div>
+        <div class="cal-day has-event">31</div>
+      </div>
+    </div>
+
+    <div class="events-list">
+      <div class="event-card">
+        <div class="event-date-block">
+          <span class="event-date-day">24</span>
+          <span class="event-date-mon">Mars</span>
+        </div>
+        <div class="event-info">
+          <h4>Tournoi de Badminton Amateur</h4>
+          <div class="event-meta">
+            <span>🕘 9h00 – 17h00</span>
+            <span>📍 Gymnase principal</span>
+            <span>👥 32 participants max</span>
+          </div>
+          <span class="event-tag tag-sport">Sport collectif</span>
+        </div>
+      </div>
+
+      <div class="event-card yoga">
+        <div class="event-date-block">
+          <span class="event-date-day">26</span>
+          <span class="event-date-mon">Mars</span>
+        </div>
+        <div class="event-info">
+          <h4>Atelier Yoga Pleine Conscience</h4>
+          <div class="event-meta">
+            <span>🕕 18h30 – 20h00</span>
+            <span>📍 Studio A</span>
+            <span>👥 15 places</span>
+          </div>
+          <span class="event-tag tag-yoga">Yoga & Bien-être</span>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date-block">
+          <span class="event-date-day">29</span>
+          <span class="event-date-mon">Mars</span>
+        </div>
+        <div class="event-info">
+          <h4>Challenge HIIT — Défi 30 minutes</h4>
+          <div class="event-meta">
+            <span>🕖 7h00 – 7h30</span>
+            <span>📍 Studio B</span>
+            <span>👥 20 places</span>
+          </div>
+          <span class="event-tag tag-cardio">Cardio</span>
+        </div>
+      </div>
+
+      <div class="event-card nutrition">
+        <div class="event-date-block">
+          <span class="event-date-day">31</span>
+          <span class="event-date-mon">Mars</span>
+        </div>
+        <div class="event-info">
+          <h4>Conférence : Nutrition sportive et performance</h4>
+          <div class="event-meta">
+            <span>🕖 19h00 – 21h00</span>
+            <span>📍 Salle de conférence</span>
+            <span>👥 Ouvert à tous</span>
+          </div>
+          <span class="event-tag tag-nutrition">Nutrition</span>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-date-block">
+          <span class="event-date-day">05</span>
+          <span class="event-date-mon">Avr</span>
+        </div>
+        <div class="event-info">
+          <h4>Stage Muay Thaï — Niveau intermédiaire</h4>
+          <div class="event-meta">
+            <span>🕙 10h00 – 14h00</span>
+            <span>📍 Salle de combat</span>
+            <span>👥 12 places</span>
+          </div>
+          <span class="event-tag tag-combat">Arts martiaux</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Nous rejoindre</p>
+  <h2>Contact</h2>
+  <div class="section-divider"></div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Venez nous voir</h3>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <label>Adresse</label>
+          <span>4250 rue Jarry Est, Montréal, QC H1Z 2G5</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <label>Téléphone</label>
+          <span>(514) 555-0198</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-detail">
+          <label>Courriel</label>
+          <span>info@fitzonemlmontreal.ca</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div class="contact-detail">
+          <label>Heures d'ouverture</label>
+          <span>Lun–Ven : 6h00 – 23h00<br>Sam–Dim : 7h00 – 22h00</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom</label>
+            <input type="text" placeholder="Jean">
+          </div>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" placeholder="Tremblay">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Courriel</label>
+          <input type="email" placeholder="jean@exemple.com">
+        </div>
+        <div class="form-group">
+          <label>Sujet</label>
+          <select>
+            <option>Information générale</option>
+            <option>Inscription / Abonnement</option>
+            <option>Cours collectifs</option>
+            <option>Événement privé</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Votre message..."></textarea>
+        </div>
+        <button class="form-submit" onclick="submitForm()">Envoyer le message →</button>
+        <div class="form-success" id="formSuccess">
+          ✅ Votre message a été envoyé ! Nous vous répondrons dans les 24 heures.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AIDE / FAQ -->
+<section id="aide">
+  <p class="section-label">Besoin d'aide ?</p>
+  <h2>Centre d'aide</h2>
+  <div class="section-divider"></div>
+  <div class="aide-grid">
+    <div>
+      <div class="aide-cats">
+        <div class="aide-cat active" onclick="setAideCat(this, 'general')">
+          Général <span class="count">5</span>
+        </div>
+        <div class="aide-cat" onclick="setAideCat(this, 'abonnement')">
+          Abonnements <span class="count">4</span>
+        </div>
+        <div class="aide-cat" onclick="setAideCat(this, 'cours')">
+          Cours & Réservations <span class="count">4</span>
+        </div>
+        <div class="aide-cat" onclick="setAideCat(this, 'compte')">
+          Mon compte <span class="count">3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="aide-content">
+      <h3 id="aideCatTitle">Questions générales</h3>
+      <div class="faq" id="faqContainer">
+
+        <div class="faq-item" data-cat="general">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Quels sont vos horaires d'ouverture ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            FitZone Montréal est ouvert du lundi au vendredi de 6h00 à 23h00, et les samedis et dimanches de 7h00 à 22h00. Les jours fériés, consultez notre page Instagram pour les horaires spéciaux.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="general">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Y a-t-il un stationnement disponible ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Oui ! Nous offrons un stationnement gratuit de 200 places directement adjacent à notre bâtiment. Accessible 7 jours sur 7. Nous sommes également accessibles en métro (station Saint-Michel) et en bus.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="general">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Puis-je amener un invité ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Les membres Premium et Elite peuvent inviter un ami gratuitement jusqu'à 2 fois par mois. Pour les membres Standard, des passes journalières pour invités sont disponibles à 15$ à la réception.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="general">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Les douches et vestiaires sont-ils inclus ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Absolument. Tous nos membres ont accès aux vestiaires spacieux avec douches, casiers sécurisés (cadenas fourni) et séchoirs à cheveux. Les serviettes sont disponibles en location à 2$/jour ou incluses avec l'abonnement Elite.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="general">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Offrez-vous des services pour les enfants ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Oui ! Nous avons une garderie supervisée (4-10 ans) disponible pour les membres du lundi au vendredi de 9h à 13h et de 17h à 20h. Des cours de natation pour enfants sont également offerts le samedi matin.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="abonnement">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Comment résilier mon abonnement ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Vous pouvez résilier votre abonnement à tout moment via votre espace membre en ligne ou en personne à la réception. Un préavis de 30 jours est requis. Aucun frais de résiliation.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="abonnement">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Puis-je geler mon abonnement ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Oui, vous pouvez suspendre votre abonnement jusqu'à 3 mois par année (blessure, voyage). Contactez notre équipe au moins 5 jours avant la prochaine facturation.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="abonnement">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Y a-t-il des rabais disponibles ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Nous offrons 15% de rabais aux étudiants, retraités et membres corporatifs (entreprises partenaires). Des promotions saisonnières sont régulièrement publiées sur notre site et nos réseaux sociaux.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="abonnement">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Comment modifier mon abonnement ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Vous pouvez monter ou descendre de niveau d'abonnement à tout moment depuis votre espace membre. Le changement prend effet au prochain cycle de facturation.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="cours">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Comment réserver un cours collectif ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Réservez via notre application mobile FitZone ou sur le site web jusqu'à 7 jours à l'avance. Les membres Premium et Elite ont priorité de réservation 48h avant l'ouverture au Standard.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="cours">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Quelle est la politique d'annulation pour les cours ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Annulez au moins 2 heures avant le cours pour libérer votre place sans pénalité. Après ce délai, un no-show est comptabilisé. 3 no-shows dans un mois entraîne une suspension temporaire des réservations.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="cours">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Les cours pour débutants sont-ils disponibles ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Tous nos cours indiquent le niveau requis (Débutant / Intermédiaire / Avancé). Nous offrons également un programme d'intégration gratuit de 3 séances pour les nouveaux membres.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="cours">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Puis-je prendre des cours si je ne suis pas membre ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Oui ! Des passes journalières (25$) et des carnets de 10 cours (200$) sont disponibles sans abonnement. Toutefois, l'abonnement reste la formule la plus avantageuse financièrement.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="compte">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Comment créer mon espace membre en ligne ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Lors de votre inscription, un courriel de bienvenue vous est envoyé avec un lien pour créer votre mot de passe. Vous pouvez ensuite gérer vos réservations, consulter votre historique et mettre à jour vos informations.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="compte">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            J'ai oublié mon mot de passe, que faire ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Cliquez sur « Mot de passe oublié » sur la page de connexion. Un lien de réinitialisation valide 24 heures vous sera envoyé par courriel. Si vous ne recevez rien, vérifiez vos courriers indésirables.
+          </div>
+        </div>
+
+        <div class="faq-item" data-cat="compte">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Comment mettre à jour mes informations de paiement ?
+            <span class="faq-arrow">+</span>
+          </button>
+          <div class="faq-answer">
+            Connectez-vous à votre espace membre, allez dans « Mon compte » puis « Paiement ». Vous pouvez modifier votre carte bancaire ou choisir le virement automatique. Vos informations sont protégées par chiffrement SSL.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTICE IA -->
+<section id="ia-notice">
+  <div class="ia-container">
+    <p class="section-label">Transparence & Éthique</p>
+    <h2>Utilisation de<br>l'Intelligence Artificielle</h2>
+    <div class="section-divider" style="margin: 0 auto 40px;"></div>
+    <div class="ia-notice-box">
+      <h3>🤖 Notre engagement de transparence envers l'IA</h3>
+      <p>Chez FitZone Montréal, nous intégrons des outils d'intelligence artificielle dans certaines de nos activités numériques. Conformément à nos valeurs de transparence et d'honnêteté envers notre communauté, nous vous informons de la façon dont nous utilisons ces technologies :</p>
+      <ul>
+        <li><strong>Conception du site web :</strong> Ce site a été créé avec l'assistance d'outils d'IA (Claude par Anthropic) dans le cadre d'un projet académique du cours MGT4101 à l'UQAM.</li>
+        <li><strong>Contenu rédactionnel :</strong> Certaines descriptions de services et textes informationnels ont été rédigés ou améliorés avec l'aide d'outils d'IA générative.</li>
+        <li><strong>Recommandations personnalisées :</strong> Notre application utilise un algorithme d'IA pour suggérer des cours adaptés à vos objectifs et votre historique d'activité.</li>
+        <li><strong>Chatbot de service à la clientèle :</strong> Notre assistant virtuel est alimenté par une IA. Pour toute demande complexe, il vous redirige vers un humain.</li>
+      </ul>
+      <p style="margin-top: 16px;">Nous nous engageons à utiliser l'IA de manière responsable, dans le respect de votre vie privée et de vos données personnelles. Aucune donnée personnelle n'est utilisée pour entraîner des modèles tiers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#accueil" class="logo">Fit<span>Zone</span></a>
+      <p>Centre multisports à Montréal dédié à votre performance et votre bien-être depuis 2015.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#agenda">Agenda</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#aide">Centre d'aide</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Musculation</a></li>
+        <li><a href="#services">Yoga & Pilates</a></li>
+        <li><a href="#services">Arts martiaux</a></li>
+        <li><a href="#services">Natation</a></li>
+        <li><a href="#services">Coaching privé</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <ul>
+        <li><a href="#">Politique de confidentialité</a></li>
+        <li><a href="#">Conditions d'utilisation</a></li>
+        <li><a href="#ia-notice">Notice IA</a></li>
+        <li><a href="#">Accessibilité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FitZone Montréal. Tous droits réservés.</span>
+    <span>Réalisé par <span class="footer-author">Votre Nom — MGT4101, Hiver 2026</span></span>
+  </div>
+</footer>
+
+<script>
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-question.open').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  // Aide categories
+  function setAideCat(el, cat) {
+    document.querySelectorAll('.aide-cat').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    const titles = {
+      general: 'Questions générales',
+      abonnement: 'Abonnements & Tarifs',
+      cours: 'Cours & Réservations',
+      compte: 'Mon compte'
+    };
+    document.getElementById('aideCatTitle').textContent = titles[cat];
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.style.display = item.dataset.cat === cat ? '' : 'none';
+    });
+    // close open answers
+    document.querySelectorAll('.faq-question.open').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.classList.remove('open');
+    });
+  }
+
+  // Init: show only general
+  setAideCat(document.querySelector('.aide-cat.active'), 'general');
+
+  // Form submit
+  function submitForm() {
+    document.getElementById('formSuccess').style.display = 'block';
+    setTimeout(() => document.getElementById('formSuccess').style.display = 'none', 5000);
+  }
+
+  // Smooth nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    document.querySelectorAll('nav ul a').forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--blanc)' : '';
+    });
+  });
+</script>
+</body>
+</html>
